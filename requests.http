@@ -1,0 +1,13 @@
+curl -X POST \
+  http://localhost:3000/api/pedidos \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "fechapedido": "2024-03-15",
+  "subtotal": 25000,
+  "descuento": 20,
+  "iva": 1000,
+  "totalpedido": 50000,
+  "preciodomicilio": 5000,
+  "estadopedido": "en camino"
+}'
+

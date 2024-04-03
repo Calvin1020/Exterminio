@@ -4,9 +4,9 @@ curl -X PUT \
   -d '{
   "fechapedido": "2023-02-15",
   "subtotal": 1000,
-  "descuento": 30,
-  "iva": 500,
-  "totalpedido": 40000,
-  "preciodomicilio": 4000,
+  "descuento": 10,
+  "iva": 100,
+  "totalpedido": 10000,
+  "preciodomicilio": 1000,
   "estadopedido": "en proceso"
 }'

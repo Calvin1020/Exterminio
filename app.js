@@ -1,41 +1,36 @@
-// app.js
-
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
-
-
+const pedidoRoute = require("./routes/pedidos");
 const userRoute = require("./routes/usuarios");
 
 
-// settings
+// Configuración de la aplicación
 const app = express();
 const port = process.env.PORT || 3000;
 
-// middlewares
-app.use(express.json()); // Para parsear JSON en el cuerpo de las solicitudes
-app.use("/api", userRoute);
-
-
+// Middleware para analizar el cuerpo de las solicitudes JSON
+app.use(express.json());
 
 // Rutas
-app.get("/", (req, res) => {
-    res.send("Welcome to my API");
-});
+app.use("/api", pedidoRoute);
+app.use("/api", userRoute);
 
 // Conexión a MongoDB
-mongoose
-    .connect(process.env.MONGODB_URI
-        , {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        }
-    )
-    .then(() => console.log("Connected to MongoDB Atlas"))
-    .catch((error) => console.error(error));
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log("Conectado a MongoDB"))
+  .catch((error) => console.error("Error al conectar a MongoDB:", error));
 
-// Iniciando el servidor
-app.listen(port, () => {
-    console.log("Server listening on port http://localhost:" + port + "/");
-});
+// Inicio del servidor
+app.listen(port, () => console.log(`Servidor escuchando en el puerto ${port}`));
+
+
+
+
+
+
+
+
+
+
 

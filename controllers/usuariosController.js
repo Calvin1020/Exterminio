@@ -59,6 +59,7 @@ function isValidEmail(email) {
   return emailRegex.test(email);
 }
 
+<<<<<<< HEAD
 const bcrypt = require('bcrypt');
 
 exports.login = async (req, res) => {
@@ -87,3 +88,22 @@ exports.login = async (req, res) => {
 
 
 
+=======
+exports.login = async (req, res) => {
+  const { email, password } = req.body;
+
+  // Verificar si el usuario existe
+  const usuario = await Usuarios.findOne({ email });
+
+  if (!usuario) {
+    return res.status(404).json({ message: "Usuario no encontrado" });
+  }
+
+  // Verificar si la contraseña coincide
+  if (password !== usuario.password) {
+    return res.status(401).json({ message: "Credenciales inválidas" });
+  }
+
+  res.status(200).json({ message: "Inicio de sesión exitoso" });
+};
+>>>>>>> origin/main

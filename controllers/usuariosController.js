@@ -14,8 +14,9 @@ exports.actualizarDatos = async (req, res) => {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
 
-    // Verificar si la contraseña coincide
-    if (passwordAnterior !== usuarioExistente.password) {
+    // Verificar si la contraseña coincide utilizando bcrypt
+    const match = await bcrypt.compare(passwordAnterior, usuarioExistente.password);
+    if (!match) {
       console.log("Credenciales anteriores inválidas");
       return res.status(401).json({ message: "Credenciales anteriores inválidas" });
     }
